@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title> Password Generator </title>
+		<style>
+			* { font-size : 40px; font-family : Cambria;}
+			body { background-color : lightblue; }	
+		</style>
+		<script>	
+			function gp()
+			{
+				event.preventDefault();
+				let s6 = document.getElementById("s6");
+				let s7 = document.getElementById("s7");
+				let s8 = document.getElementById("s8");
+				let s9 = document.getElementById("s9");
+				let uc = document.getElementById("uc");
+				let di = document.getElementById("di");
+				let ans = document.getElementById("ans");
+
+				let size = 0;
+				if (s6.checked)			size  = 6;
+				else if (s7.checked)		size = 7;
+				else if (s8.checked)		size = 8;
+				else if (s9.checked)		size = 9;
+
+				let text = "abcdefghijklmnopqrstuvwyz";
+				if (uc.checked)
+				text = text + text.toUpperCase();
+				if (di.checked)
+				text = text + "0123456789"
+
+				let pw = "";
+				for (let i = 1; i <= size; i++)
+				{
+					let r = parseInt(Math.random() * text.length);
+					pw = pw + text[r];
+				}
+				ans.innerHTML = "password = " + pw;
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<h1> Password Generator </h1>
+			<form onsubmit="return gp()">
+				<label> Select Password size </label>
+				<br/>
+				<input type="radio" style=" name="s" id="s6"> 6
+				<input type="radio" name="s" id="s7"> 7
+				<input type="radio" name="s" id="s8" checked=true> 8
+				<input type="radio" name="s" id="s9"> 9
+				<br></br>
+				<label> Select Password type </label>
+				<br/>
+				<input type="checkbox" id="uc"> UpperCase
+				<input type="checkbox" id="di" > Digits
+				<br></br>
+				<input type="submit" value="Generate Password" />
+			</form>
+			<h1 id="ans" > </h1>
+		</center>
+	</body>
+</html>
